@@ -5,7 +5,6 @@ from django.db import models
 
 class Pdf(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True)
     description = models.TextField()
     file = models.FileField(upload_to='images')
 

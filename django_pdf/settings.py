@@ -1,3 +1,8 @@
+import os
+import django_heroku
+import dj_database_url
+from decouple import config
+
 """
 Django settings for django_pdf project.
 
@@ -48,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'django_pdf.urls'
@@ -118,6 +124,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -128,3 +139,6 @@ MEDIA_ROOT = BASE_DIR / 'uploads'
 
 
 MEDIA_URL = '/ files /'
+
+
+django_heroku.settings(locals())
